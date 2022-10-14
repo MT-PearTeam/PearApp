@@ -1,9 +1,9 @@
-## Curso MinTic Desarrollo de applicaciones Web 
+## Curso MinTic Desarrollo de aplicaciones Web 
 ## PearApp
 
 ## Participantes
 
-- Santiago Acero Garzon
+- Santiago Acero Garzón
 - 
 -
 -
