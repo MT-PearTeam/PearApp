@@ -4,7 +4,5 @@
 ## Participantes
 
 - Santiago Acero Garzón
-- 
--
--
--
+- Diego Alejandro Martinez
+- Orlando Benedetty Moreno
