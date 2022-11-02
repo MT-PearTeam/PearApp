@@ -114,7 +114,8 @@
     background-color:white;
     display: flex;
     flex-direction: 2 row;
-    padding: 2px;  
+    padding: 2px;
+    
 }
 .Fondo3{
     background-color:orange;
@@ -141,7 +142,7 @@
 }
 .Head{
     text-align: center;
-    padding-left: 500px;
+    padding-left: 420px;
     padding-top: 30px;
     font-weight: bold;
     color: white;
