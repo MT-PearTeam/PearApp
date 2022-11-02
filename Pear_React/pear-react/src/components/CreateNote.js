@@ -4,8 +4,6 @@ import axios from 'axios'
 
 export default class CreateUser extends Component {
     
-    
-    
     state = {
         productos: [],
         producto:'',
@@ -16,6 +14,8 @@ export default class CreateUser extends Component {
         
     }
 
+
+
     async componentDidMount() {
         this.getProductos();
         //console.log(rest);
@@ -25,8 +25,36 @@ export default class CreateUser extends Component {
     getProductos=async () =>{
     const rest = await axios.get('http://localhost:3000/productos');
     this.setState({ productos: rest.data });
+
     }
     
+
+    onSubmit = async (e) => {
+        e.preventDefault();
+        if(this.state.editar){
+            await axios.put('http://localhost:3000/carrito/'+this.state._id,{
+                producto:this.state.producto,
+                precio:this.state._precio,
+                descripción:this.state._descripción
+            });
+            }
+        else{
+            await axios.post('http://localhost:3000/carrito',{
+                producto:this.state.producto,
+                precio:this.state._precio,
+                descripción:this.state._descripción
+            });
+        }
+        this.getProductos();
+            
+        }
+        
+        
+        //console.log(res)
+        
+    
+
+
     cargarDatosProducto= async (id,producto,precio,descripción) =>{
         //console.log(id+'-'+name+'-'+price+'-'+description);
         this.setState({
@@ -39,81 +67,51 @@ export default class CreateUser extends Component {
         console.log(this.state._id);
     }
 
-    onSubmit = async (e) => {
-      e.preventDefault();
-      if(this.state.editar){
-          await axios.put('http://localhost:3000/carrito/'+this.state._id,{
-              producto:this.state.producto,
-              precio:this.state._precio,
-              
-          });
-          }
-      else{
-          await axios.post('http://localhost:3000/carrito',{
-              producto:this.state.producto,
-              precio:this.state._precio,
-              
-          });
-      }
-      this.getProductos();
-      this.onClean();
-      //console.log(res)
-      
-  }
 
-    async handleConfirmacion(e){
-    e.preventDefault();
-    this.alert('Producto agregado');
-  }
+
     render() {
         return (
-                <div className="col-md-8">
-                  
-                    <ul className="list-group">
-                        {
-                            this.state.productos.map(producto => (
-                                
-                              <div className="row">
-                              <div className="col-md-4">
-                                  <div className="card card-body"
-                                    key={producto.id} 
-                                    onDoubleClick={()=>this.deleteUser(producto.id)} 
-                                    onClick={()=>this.cargarDatosProducto(producto.id,producto.producto,producto.precio,producto.descripción)}
-                                    >
-                                      <h3> Colores </h3>
-                                      <form onSubmit={this.onSubmit}>
-                                          <div className="form-group">
-                                              <div className="container p-2">
-                                              <h6> {producto.producto} </h6>
-                                              </div>
-                                              <div className="container p-2">
-                                              <h6> {producto.precio} </h6>
-                                              </div>
-                                              <div className="container p-2">
-                                              <h6> {producto.descripción} </h6>
-                                              </div>
-                                              <div className="container p-4">
-                                              <button type="submit" className="btn btn-primary" onClick={this.handleConfirmacion}>
-                                              Comprar
-                                              </button>
-                                              </div>
-                                          </div>
-                                          </form>
-                                  </div>
-                                  <br/>
-                                  </div>
+            <div className="row">
+            <div className="col-md-4">
+            <div className="card card-body">
+                    <h4> Colores </h4>                    
+                    <form onSubmit={this.onSubmit}>                        
+                    {this.state.productos.map(producto => (
+                    <div className="form-group">
+                        <div
+                        key={producto.id} 
+                        onDoubleClick={()=>this.deleteUser(producto.id)} 
+                        onClick={()=>this.cargarDatosProducto(producto.id,producto.producto,producto.precio,producto.descripción)}
+                        >
+                            <div className="container p-2">
+                            <h6> {producto.producto} </h6>
+                            </div>
+                            <div className="container p-2">
+                                <h6> {producto.precio} </h6>
+                            </div>
+                            <div className="container p-2">
+                                <h6> {producto.descripción} </h6>
+                            </div>
+                            <div className="container p-4">
                         </div>
-                               
-                                )
-                                
-                            )
-                            
-                        }
+                        </div>
+                        <div className="container p-4">
+                        <button type="submit" className="btn btn-primary">
+                            Comprar
+                        </button>
+                        </div>
                         
-                    </ul>
-
+                        </div>
+                        
+                        ))}                     
+                    </form>
+                    
+                    
                 </div>
+                
+            </div>
+           
+            </div>
             
-        )
-    }
+)}
 }
