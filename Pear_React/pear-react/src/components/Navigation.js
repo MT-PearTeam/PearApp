@@ -16,13 +16,13 @@ export default class Navigation extends Component {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                              <Link className="nav-link" to="/">Notes</Link>
+                              <Link className="nav-link" to="/">Carrito de compra</Link>
                             </li>
                             <li className="nav-item">
-                              <Link className="nav-link" to="/create">Create Note</Link>
+                              <Link className="nav-link" to="/create">Lista de productos</Link>
                             </li>
                             <li className="nav-item">
-                            <Link className="nav-link" to="/user">Lista de productos</Link>
+                            <Link className="nav-link" to="/user">Modificar productos</Link>
                             </li>
                             
                         </ul>
