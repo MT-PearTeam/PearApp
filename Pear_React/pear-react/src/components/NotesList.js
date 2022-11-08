@@ -12,9 +12,12 @@ export default class CreateUser extends Component {
         editar:false,
         _id:'',
         _precio:'',
-        _descripción:''
+        _descripción:'',
+        resultado: [],
+        _total:''
         
     }
+
 
     async componentDidMount() {
         this.getCarrito();
@@ -26,20 +29,20 @@ export default class CreateUser extends Component {
     const rest = await axios.get('http://localhost:3000/carrito');
     this.setState({ carrito: rest.data });
     }
-    
+
     onChangeName = (e) => {
 	//console.log(e.target.value)
-    this.setState({producto:e.target.value});           
+    this.setState({producto:e.target});           
     }
 
     onChangePrice = (e) => {
         //console.log(e.target.value)
-        this.setState({_precio:e.target.value});           
+        this.setState({_precio:e.target});           
         }
 
     onChangeDescription = (e) => {
         //console.log(e.target.value)
-        this.setState({_descripción:e.target.value});           
+        this.setState({_descripción:e.target});           
         }
     
     onClean =() => {
@@ -54,14 +57,14 @@ export default class CreateUser extends Component {
     onSubmit = async (e) => {
         e.preventDefault();
         if(this.state.editar){
-            await axios.put('http://localhost:3000/carrito/'+this.state._id,{
+            await axios.put('http://localhost:3000/compra/'+this.state._id,{
                 producto:this.state.producto,
                 precio:this.state._precio,
                 descripción:this.state._descripción
             });
             }
         else{
-            await axios.post('http://localhost:3000/carrito',{
+            await axios.post('http://localhost:3000/compra',{
                 producto:this.state.producto,
                 precio:this.state._precio,
                 descripción:this.state._descripción
@@ -91,13 +94,14 @@ export default class CreateUser extends Component {
         console.log(this.state._id);
     }
 
-
-
+    
     render() {
         return (
             <div className="row">
                 <div className="col-md-8">
                     <ul className="list-group">
+                        <div className="card card-body">
+                    <form className='objForm' onSubmit={this.onSubmit}>
                         {
                             this.state.carrito.map(producto => (
                                 
@@ -109,19 +113,32 @@ export default class CreateUser extends Component {
                                     >
                                     
                                     {producto.producto}<br/>
-                                    {producto.precio}
                                     
+                                    <a htmlFor='_precio'>{producto.precio}</a>
                                     
                                 </li>
+                                
                                 
                                 )
                                 
                             )
                             
                         }
+                        <button type="submit" className="btn btn-primary">
+                        Comprar
+                        </button>
                         
-                    </ul>
+                    </form>
+                        <br/>
 
+                        <div>
+                        <h6>Total: $15.38</h6>
+
+                        </div>
+
+                        </div>
+                    </ul>
+                    
                 </div>
             </div>
         )

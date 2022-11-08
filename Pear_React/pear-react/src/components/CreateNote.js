@@ -13,8 +13,7 @@ export default class CreateUser extends Component {
         _descripción:''
         
     }
-
-
+    
 
     async componentDidMount() {
         this.getProductos();
@@ -67,8 +66,7 @@ export default class CreateUser extends Component {
         console.log(this.state._id);
     }
 
-
-
+   
     render() {
         return (
             <div className="row">
@@ -103,8 +101,11 @@ export default class CreateUser extends Component {
                         
                         </div>
                         
-                        ))}                     
+                        ))}
+                                            
                     </form>
+                    
+                    
                     
                     
                 </div>

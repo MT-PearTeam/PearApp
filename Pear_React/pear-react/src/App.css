@@ -59,6 +59,9 @@
 }
 .card-body{
   display: flex;
-  flex-direction: column;
-  
+  flex-direction: column;  
+}
+.objForm{
+  display: flex;
+  flex-direction: row;  
 }
